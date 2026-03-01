@@ -1,38 +1,44 @@
 import java.util.Random;
 
 public class SelectionSort {
-    static void main(String[] args) {
-        Random random = new Random();
-        int [] v;
+    public static void insertionSort(int [] insertion){
 
-        v = new int[1000];
+        Random random = new Random();
+
         int n;
-        n = v.length;
+        n = insertion.length;
+
 
         for (int i = 0; i < n; i++) {
-            v[i] = random.nextInt(999);
+            insertion[i] = random.nextInt(999);
         }
 
         int minimo;
         int ubicacion;
         int temp;
 
-        for (int i = 0; i < n; i++) {
-            minimo = v[i];
+        for (int i = 0; i < n - 1; i++) {
+            minimo = insertion[i];
             ubicacion = i;
-            for (int j = i; j < n; j++) {
-                if (minimo > v[j]){
-                    minimo = v[j];
+            for (int j = i + 1; j < n; j++) {
+                if (minimo > insertion[j]){
+                    minimo = insertion[j];
                     ubicacion = j;
                 }
             }
-            temp = v[i];
-            v[i] = minimo;
-            v[ubicacion] = temp;
+            temp = insertion[i];
+            insertion[i] = minimo;
+            insertion[ubicacion] = temp;
         }
 
-        for (int i : v) {
+        for (int i : insertion) {
             System.out.println(i);
         }
+
+    }
+
+    public static void main(String[] args) {
+        int [] v = new int[1000];
+        insertionSort(v);
     }
 }
