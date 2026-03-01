@@ -1,6 +1,7 @@
 import java.util.Random;
 
 public class SelectionSort {
+
     public static void insertionSort(int [] insertion){
 
         Random random = new Random();
@@ -18,16 +19,14 @@ public class SelectionSort {
         int temp;
 
         for (int i = 0; i < n - 1; i++) {
-            minimo = insertion[i];
             ubicacion = i;
             for (int j = i + 1; j < n; j++) {
-                if (minimo > insertion[j]){
-                    minimo = insertion[j];
+                if (insertion[ubicacion] > insertion[j]){
                     ubicacion = j;
                 }
             }
             temp = insertion[i];
-            insertion[i] = minimo;
+            insertion[i] = insertion[ubicacion];
             insertion[ubicacion] = temp;
         }
 
@@ -37,6 +36,9 @@ public class SelectionSort {
 
     }
 
+    /**
+     * Arreglo de 1000 elementos ordenados con selection sort
+     */
     public static void main(String[] args) {
         int [] v = new int[1000];
         insertionSort(v);
