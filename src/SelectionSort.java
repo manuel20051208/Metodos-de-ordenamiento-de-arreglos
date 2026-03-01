@@ -14,17 +14,20 @@ public class SelectionSort {
             insertion[i] = random.nextInt(999);
         }
 
-        int minimo;
         int ubicacion;
         int temp;
 
         for (int i = 0; i < n - 1; i++) {
             ubicacion = i;
+
             for (int j = i + 1; j < n; j++) {
+
+                // We find the smallest element
                 if (insertion[ubicacion] > insertion[j]){
                     ubicacion = j;
                 }
             }
+
             temp = insertion[i];
             insertion[i] = insertion[ubicacion];
             insertion[ubicacion] = temp;

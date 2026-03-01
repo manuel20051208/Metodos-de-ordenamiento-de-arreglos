@@ -18,10 +18,14 @@ public class InsertionSort {
         for (int i = 1; i < n; i++) {
             ordenado = v[i];
             int j = i - 1;
+
+            // Find the right location
             while(j >= 0 && v[j] > ordenado){
                 v[j + 1] = v[j];
                 j--;
             }
+
+            // add the location found
             v[j + 1] = ordenado;
         }
 
