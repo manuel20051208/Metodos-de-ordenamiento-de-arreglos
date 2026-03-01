@@ -1,36 +1,39 @@
 import java.util.Random;
 
 public class InsertionSort {
-    static void main(String[] args) {
-
+    public static void insertionSort(int[] arreglo) {
         Random random = new Random();
-        int[] v;
-
-        v = new int[10000];
-        int n;
-        n = v.length;
+        int n = arreglo.length;
 
         for (int i = 0; i < n; i++) {
-            v[i] = random.nextInt(1000 + 1);
+            arreglo[i] = random.nextInt(1000 + 1);
         }
 
         int ordenado;
         for (int i = 1; i < n; i++) {
-            ordenado = v[i];
+            ordenado = arreglo[i];
             int j = i - 1;
 
             // Find the right location
-            while(j >= 0 && v[j] > ordenado){
-                v[j + 1] = v[j];
+            while (j >= 0 && arreglo[j] > ordenado) {
+                arreglo[j + 1] = arreglo[j];
                 j--;
             }
 
             // add the location found
-            v[j + 1] = ordenado;
+            arreglo[j + 1] = ordenado;
         }
 
-        for (int i : v) {
+        for (int i : arreglo) {
             System.out.println(i);
         }
+    }
+
+    /**
+     * llamada del metodo insertionSort
+     */
+    static void main(String[] args) {
+        int[] v = new int[10000];
+        insertionSort(v);
     }
 }
