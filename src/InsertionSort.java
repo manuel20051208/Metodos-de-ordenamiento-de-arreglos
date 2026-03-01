@@ -14,12 +14,15 @@ public class InsertionSort {
             v[i] = random.nextInt(1000 + 1);
         }
 
-
         int ordenado;
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = i + 1; j > 0; j--) {
-                if(v[j] > v[])
+        for (int i = 1; i < n; i++) {
+            ordenado = v[i];
+            int j = i - 1;
+            while(j >= 0 && v[j] > ordenado){
+                v[j + 1] = v[j];
+                j--;
             }
+            v[j + 1] = ordenado;
         }
 
         for (int i : v) {
