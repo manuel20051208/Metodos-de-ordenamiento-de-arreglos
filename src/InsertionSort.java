@@ -25,12 +25,8 @@ public class InsertionSort {
             // add the location found
             arreglo[j + 1] = ordenado;
         }
-
-        for (int i : arreglo) {
-            System.out.println(i);
-        }
     }
-    
+
     /**
      * llamada del metodo insertionSort
      */
@@ -43,5 +39,9 @@ public class InsertionSort {
         // código
         long end = System.nanoTime();
         System.out.println("Tiempo: " + ((end - start)/1_000_000.0) + " ns");
+
+        for (int i : v) {
+            System.out.println(i);
+        }
     }
 }
