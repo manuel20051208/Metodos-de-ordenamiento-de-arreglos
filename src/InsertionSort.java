@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class InsertionSort {
 
-    //metodo insertionsort
+    // metodo insertionsort
     public static void insertionSort(int[] arreglo) {
         Random random = new Random();
         int n = arreglo.length;
@@ -30,12 +30,18 @@ public class InsertionSort {
             System.out.println(i);
         }
     }
-
+    
     /**
      * llamada del metodo insertionSort
      */
-    static void main(String[] args) {
-        int[] v = new int[10000];
+    public static void main(String[] args) {
+        int[] v = new int[1000];
+        
+        long start = System.nanoTime();
+        
         insertionSort(v);
+        // código
+        long end = System.nanoTime();
+        System.out.println("Tiempo: " + ((end - start)/1_000_000.0) + " ns");
     }
 }
