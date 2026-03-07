@@ -1,6 +1,8 @@
 import java.util.Random;
 
 public class ShellSort {
+
+    //metodo shellsort
     public static void shellSort(int[] arreglo) {
         Random random = new Random();
         int n = arreglo.length;

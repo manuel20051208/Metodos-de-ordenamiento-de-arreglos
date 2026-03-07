@@ -2,7 +2,8 @@ import java.util.Random;
 
 public class SelectionSort {
 
-    public static void insertionSort(int [] insertion){
+    //metodo selectionsort
+    public static void selectionsort(int [] insertion){
 
         Random random = new Random();
 
@@ -44,6 +45,6 @@ public class SelectionSort {
      */
     public static void main(String[] args) {
         int [] v = new int[1000];
-        insertionSort(v);
+        selectionsort(v);
     }
 }

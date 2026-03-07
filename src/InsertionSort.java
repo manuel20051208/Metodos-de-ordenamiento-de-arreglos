@@ -1,6 +1,8 @@
 import java.util.Random;
 
 public class InsertionSort {
+
+    //metodo insertionsort
     public static void insertionSort(int[] arreglo) {
         Random random = new Random();
         int n = arreglo.length;
