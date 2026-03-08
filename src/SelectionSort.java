@@ -45,6 +45,18 @@ public class SelectionSort {
      */
     public static void main(String[] args) {
         int [] v = new int[1000];
+        
+        //tiempo de ejecucion
+        long start = System.nanoTime();
+        
         selectionsort(v);
+
+        long end = System.nanoTime();
+
+        System.out.println("Tiempo: " + ((end - start)/1_000_000.0) + " ns");
+
+        for(int i: v){
+            System.out.println(i);
+        }
     }
 }

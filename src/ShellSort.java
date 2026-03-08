@@ -22,13 +22,21 @@ public class ShellSort {
             }
         }
 
-        for(int i: arreglo){
-            System.out.println(i);
-        }
     }
-
+    
     static void main(String[] args) {
         int[] v = new int[1000];
+
+        //calculo tiempo de ejecucion
+        long start = System.nanoTime();
+
         shellSort(v);
+
+        long end = System.nanoTime();
+
+        System.out.println("Tiempo: " + ((end - start)/1_000_000.0) + " ns");
+        for(int i: v){
+            System.out.println(i);
+        }
     }
 }
