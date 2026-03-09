@@ -4,13 +4,8 @@ public class ShellSort {
 
     // metodo shellsort
     public static void shellSort(int[] arreglo) {
-        Random random = new Random();
         int n = arreglo.length;
-
-        for (int i = 0; i < n; i++) {
-            arreglo[i] = random.nextInt(1 + 1000);
-        }
-
+        
         for (int interval = n / 2; interval > 0; interval /= 2) {
             for (int i = interval; i < n; i += 1) {
                 int temp = arreglo[i];
@@ -21,11 +16,15 @@ public class ShellSort {
                 arreglo[j] = temp;
             }
         }
-
     }
-
+    
     public static void main(String[] args) {
+        Random random = new Random();
         int[] v = new int[1000];
+
+        for (int i = 0; i < v.length; i++) {
+            v[i] = random.nextInt(1000);
+        }
 
         // calculo tiempo de ejecucion
         long start = System.nanoTime();

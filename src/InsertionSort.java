@@ -4,13 +4,8 @@ public class InsertionSort {
 
     // metodo insertionsort
     public static void insertionSort(int[] arreglo) {
-        Random random = new Random();
         int n = arreglo.length;
-
-        for (int i = 0; i < n; i++) {
-            arreglo[i] = random.nextInt(1000 + 1);
-        }
-
+        
         int ordenado;
         for (int i = 1; i < n; i++) {
             ordenado = arreglo[i];
@@ -31,8 +26,13 @@ public class InsertionSort {
      * llamada del metodo insertionSort
      */
     public static void main(String[] args) {
+        Random random = new Random();
         int[] v = new int[1000];
 
+        for (int i = 0; i < v.length; i++) {
+            v[i] = random.nextInt(1000 + 1);
+        }
+        
         // calculo tiempo de ejecucion
         long start = System.nanoTime();
 
