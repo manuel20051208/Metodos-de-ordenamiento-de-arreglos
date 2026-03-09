@@ -24,7 +24,7 @@ public class ShellSort {
 
     }
     
-    static void main(String[] args) {
+    public static void main(String[] args) {
         int[] v = new int[1000];
 
         //calculo tiempo de ejecucion
@@ -35,6 +35,7 @@ public class ShellSort {
         long end = System.nanoTime();
 
         System.out.println("Tiempo: " + ((end - start)/1_000_000.0) + " ns");
+        
         for(int i: v){
             System.out.println(i);
         }

@@ -33,11 +33,6 @@ public class SelectionSort {
             insertion[i] = insertion[ubicacion];
             insertion[ubicacion] = temp;
         }
-
-        for (int i : insertion) {
-            System.out.println(i);
-        }
-
     }
 
     /**
