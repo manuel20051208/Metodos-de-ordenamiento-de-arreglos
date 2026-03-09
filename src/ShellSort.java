@@ -33,10 +33,11 @@ public class ShellSort {
 
         long end = System.nanoTime();
 
-        System.out.println("Tiempo: " + ((end - start) / 1_000_000.0) + " ns");
-
+        
         for (int i : v) {
             System.out.println(i);
         }
+        
+        System.out.println("Tiempo: " + ((end - start) / 1_000_000.0) + " ns");
     }
 }
