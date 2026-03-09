@@ -1,7 +1,5 @@
 import java.util.Random;
-
 public class ShellSort {
-
     // metodo shellsort
     public static void shellSort(int[] arreglo) {
         int n = arreglo.length;
@@ -17,13 +15,12 @@ public class ShellSort {
             }
         }
     }
-    
     public static void main(String[] args) {
         Random random = new Random();
-        int[] v = new int[1000];
+        int[] v = new int[5000];
 
         for (int i = 0; i < v.length; i++) {
-            v[i] = random.nextInt(1000);
+            v[i] = random.nextInt(5000);
         }
 
         // calculo tiempo de ejecucion
@@ -32,7 +29,6 @@ public class ShellSort {
         shellSort(v);
 
         long end = System.nanoTime();
-
         
         for (int i : v) {
             System.out.println(i);

@@ -1,7 +1,5 @@
 import java.util.Random;
-
 public class InsertionSort {
-
     // metodo insertionsort
     public static void insertionSort(int[] arreglo) {
         int n = arreglo.length;
@@ -21,7 +19,6 @@ public class InsertionSort {
             arreglo[j + 1] = ordenado;
         }
     }
-
     /**
      * llamada del metodo insertionSort
      */
