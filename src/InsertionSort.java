@@ -32,14 +32,14 @@ public class InsertionSort {
      */
     public static void main(String[] args) {
         int[] v = new int[1000];
-        
-        //calculo tiempo de ejecucion
+
+        // calculo tiempo de ejecucion
         long start = System.nanoTime();
-        
+
         insertionSort(v);
-        // código   
+        // código
         long end = System.nanoTime();
-        System.out.println("Tiempo: " + ((end - start)/1_000_000.0) + " ns");
+        System.out.println("Tiempo: " + ((end - start) / 1_000_000.0) + " ns");
 
         for (int i : v) {
             System.out.println(i);
