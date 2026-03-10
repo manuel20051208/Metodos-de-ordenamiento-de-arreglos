@@ -1,9 +1,10 @@
 import java.util.Random;
+
 public class InsertionSort {
     // metodo insertionsort
     public static void insertionSort(int[] arreglo) {
         int n = arreglo.length;
-        
+
         int ordenado;
         for (int i = 1; i < n; i++) {
             ordenado = arreglo[i];
@@ -14,33 +15,48 @@ public class InsertionSort {
                 arreglo[j + 1] = arreglo[j];
                 j--;
             }
-
             // add the location found
             arreglo[j + 1] = ordenado;
         }
     }
+
+    public static int [] rellenar(int storage){
+        Random random = new Random();
+        int [] v = new int[storage];
+
+        for (int i = 0; i < v.length; i++) {
+            v[i] = random.nextInt(10000);
+        }
+
+        return v;
+    }
+
     /**
      * llamada del metodo insertionSort
      */
     public static void main(String[] args) {
-        Random random = new Random();
-        int[] v = new int[1000];
+        int[] v;
+        int[] tiempos = {1000, 3000, 5000, 7000, 10000};
 
-        for (int i = 0; i < v.length; i++) {
-            v[i] = random.nextInt(1000 + 1);
+        for (int i = 0; i < tiempos.length; i++) {
+
+            long total = 0;
+
+            for (int k = 0; k < 10; k++) {
+
+                v = rellenar(tiempos[i]);
+
+                long start = System.nanoTime();
+                insertionSort(v);
+                long end = System.nanoTime();
+
+                total += (end - start);
+            }
+
+            double promedio = (total / 50) / 1_000_000.0;
+
+            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedio + " ms");
+
         }
-
-        // calculo tiempo de ejecucion
-        long start = System.nanoTime();
-
-        insertionSort(v);
-        // código
-        long end = System.nanoTime();
-        
-        for (int i : v) {
-            System.out.println(i);
-        }
-        
-        System.out.println("Tiempo: " + ((end - start) / 1_000_000.0) + " ns");
     }
 }
