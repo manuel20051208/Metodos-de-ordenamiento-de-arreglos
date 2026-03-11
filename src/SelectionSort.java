@@ -65,4 +65,5 @@ public class SelectionSort {
            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedio + " ms");
 
        }
+   }
 }

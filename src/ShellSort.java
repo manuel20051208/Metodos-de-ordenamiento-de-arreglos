@@ -51,4 +51,5 @@ public class ShellSort {
             System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedio + " ms");
 
         }
+    }
 }
