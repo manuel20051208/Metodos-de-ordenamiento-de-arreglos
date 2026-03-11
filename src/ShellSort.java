@@ -15,25 +15,40 @@ public class ShellSort {
             }
         }
     }
-    public static void main(String[] args) {
+
+    public static int [] rellenar(int storage){
         Random random = new Random();
-        int[] v = new int[5000];
+        int [] v = new int[storage];
 
         for (int i = 0; i < v.length; i++) {
-            v[i] = random.nextInt(5000);
+            v[i] = random.nextInt(10000);
         }
-
-        // calculo tiempo de ejecucion
-        long start = System.nanoTime();
-
-        shellSort(v);
-
-        long end = System.nanoTime();
-        
-        for (int i : v) {
-            System.out.println(i);
-        }
-        
-        System.out.println("Tiempo: " + ((end - start) / 1_000_000.0) + " ns");
+        return v;
     }
+
+    public static void main(String[] args) {
+        int[] v;
+        int[] tiempos = {1000, 3000, 5000, 7000, 10000};
+
+        for (int i = 0; i < tiempos.length; i++) {
+
+            long total = 0;
+
+            //iteramos varias veces para sumar y promediar por cada vector
+            for (int k = 0; k < 10; k++) {
+
+                v = rellenar(tiempos[i]);
+
+                long start = System.nanoTime();
+                shellSort(v);
+                long end = System.nanoTime();
+
+                total += (end - start);
+            }
+
+            double promedio = (total / 10) / 1_000_000.0;
+
+            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedio + " ms");
+
+        }
 }
