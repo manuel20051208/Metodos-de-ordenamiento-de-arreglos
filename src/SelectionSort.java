@@ -2,38 +2,35 @@ import java.util.Random;
 
 public class SelectionSort {
     // metodo selectionsort
-    public static int selectionsort(int[] insertion) {
-        int n = insertion.length;
-        int ubicacion;
-        int temp;
-        int cantidadMovimiento = 0;
+    public static int selectionSort(int[] arr) {
+        int n = arr.length;
+        int ubicacion, temp;
+        int movimientos = 0;
 
         for (int i = 0; i < n - 1; i++) {
             ubicacion = i;
 
             for (int j = i + 1; j < n; j++) {
-
-                // We find the smallest element
-                if (insertion[ubicacion] > insertion[j]) {
+                if (arr[ubicacion] > arr[j]) {
                     ubicacion = j;
                 }
             }
 
-            temp = insertion[i];
-            insertion[i] = insertion[ubicacion];
-            insertion[ubicacion] = temp;
-            cantidadMovimiento++;
+            if (ubicacion != i) {
+                temp = arr[i];
+                arr[i] = arr[ubicacion];
+                arr[ubicacion] = temp;
+                movimientos++;
+            }
         }
-
-        return cantidadMovimiento;
+        return movimientos;
     }
 
-    public static int[] rellenar(int storage) {
+    public static int[] rellenar(int size) {
         Random random = new Random();
-        int[] v = new int[storage];
-
-        for (int i = 0; i < v.length; i++) {
-            v[i] = random.nextInt(10000);
+        int[] v = new int[size];
+        for (int i = 0; i < size; i++) {
+            v[i] = random.nextInt(50000);
         }
         return v;
     }
@@ -42,28 +39,35 @@ public class SelectionSort {
      * Arreglo de 1000 elementos ordenados con selection sort
      */
     public static void main(String[] args) {
-        int[] v;
         int[] tiempos = { 1000, 3000, 5000, 7000, 10000 };
-        
+        int[] v;
+
+        // encabezado
+        System.out.println("=".repeat(55));
+        System.out.printf("%-15s %-25s %-20s%n", "n", "Tiempo promedio(ms)", "Movimientos");
+        System.out.println("=".repeat(55));
+
         for (int i = 0; i < tiempos.length; i++) {
             long total = 0;
-            int cantidadMovimiento = 0;
-            // iteramos varias veces para sumar y promediar por cada vector
-            for (int k = 0; k < 10; k++) {
+            long cantidadMovimiento = 0;
+
+            for (int k = 0; k < 100; k++) {
                 v = rellenar(tiempos[i]);
 
                 long start = System.nanoTime();
-                cantidadMovimiento += selectionsort(v);
+                cantidadMovimiento += selectionSort(v);
                 long end = System.nanoTime();
 
                 total += (end - start);
             }
 
-            double promedioTiempo = (total / 10) / 1_000_000.0;
-            int promedioMovimiento = cantidadMovimiento / 10;
+            double promedioTiempo = (total / 100) / 1_000_000.0;
+            long promedioMovimiento = cantidadMovimiento / 100;
 
-            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedioTiempo + " ms"
-                + " | " + " cantidad repeticiones: " + promedioMovimiento );
+            System.out.printf("%-15d %-25.4f %-20d%n",
+                    tiempos[i], promedioTiempo, promedioMovimiento);
         }
+
+        System.out.println("=".repeat(55));
     }
 }

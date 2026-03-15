@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class ShellSort {
     // metodo shellsort
     public static int shellSort(int[] arreglo) {
@@ -10,6 +11,7 @@ public class ShellSort {
                 int temp = arreglo[i];
                 int j;
                 for (j = i; j >= interval && arreglo[j - interval] > temp; j -= interval) {
+
                     arreglo[j] = arreglo[j - interval];
                     cantidadMovimiento++;
                 }
@@ -21,25 +23,30 @@ public class ShellSort {
         return cantidadMovimiento;
     }
 
-    public static int [] rellenar(int storage){
+    public static int[] rellenar(int size) {
         Random random = new Random();
-        int [] v = new int[storage];
+        int[] v = new int[size];
 
         for (int i = 0; i < v.length; i++) {
-            v[i] = random.nextInt(10000);
+            v[i] = random.nextInt(50000);
         }
         return v;
     }
 
     public static void main(String[] args) {
-        int[] v;
         int[] tiempos = { 1000, 3000, 5000, 7000, 10000 };
+        int[] v;
+
+        // encabezado
+        System.out.println("=".repeat(55));
+        System.out.printf("%-15s %-25s %-20s%n", "n", "Tiempo promedio(ms)", "Movimientos");
+        System.out.println("=".repeat(55));
 
         for (int i = 0; i < tiempos.length; i++) {
             long total = 0;
-            int cantidadMovimiento = 0;
-            // iteramos varias veces para sumar y promediar por cada vector
-            for (int k = 0; k < 10; k++) {
+            long cantidadMovimiento = 0;
+
+            for (int k = 0; k < 100; k++) {
                 v = rellenar(tiempos[i]);
 
                 long start = System.nanoTime();
@@ -49,11 +56,13 @@ public class ShellSort {
                 total += (end - start);
             }
 
-            double promedioTiempo = (total / 10) / 1_000_000.0;
-            int promedioMovimiento = cantidadMovimiento / 10;
+            double promedioTiempo = (total / 100) / 1_000_000.0;
+            long promedioMovimiento = cantidadMovimiento / 100;
 
-            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedioTiempo + " ms"
-                    + " | " + " cantidad repeticiones: " + promedioMovimiento);
+            System.out.printf("%-15d %-25.4f %-20d%n",
+                    tiempos[i], promedioTiempo, promedioMovimiento);
         }
+
+        System.out.println("=".repeat(55));
     }
 }
