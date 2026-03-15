@@ -1,34 +1,36 @@
 import java.util.Random;
 
 public class SelectionSort {
-
     // metodo selectionsort
-    public static void selectionsort(int[] insertion) {
+    public static int selectionsort(int[] insertion) {
         int n = insertion.length;
-        
         int ubicacion;
         int temp;
-        
+        int cantidadMovimiento = 0;
+
         for (int i = 0; i < n - 1; i++) {
             ubicacion = i;
-            
+
             for (int j = i + 1; j < n; j++) {
-                
+
                 // We find the smallest element
                 if (insertion[ubicacion] > insertion[j]) {
                     ubicacion = j;
                 }
             }
-            
+
             temp = insertion[i];
             insertion[i] = insertion[ubicacion];
             insertion[ubicacion] = temp;
+            cantidadMovimiento++;
         }
+
+        return cantidadMovimiento;
     }
 
-    public static int [] rellenar(int storage){
+    public static int[] rellenar(int storage) {
         Random random = new Random();
-        int [] v = new int[storage];
+        int[] v = new int[storage];
 
         for (int i = 0; i < v.length; i++) {
             v[i] = random.nextInt(10000);
@@ -36,34 +38,32 @@ public class SelectionSort {
         return v;
     }
 
-
     /**
      * Arreglo de 1000 elementos ordenados con selection sort
-    */
-   public static void main(String[] args) {
-       int[] v;
-       int[] tiempos = {1000, 3000, 5000, 7000, 10000};
+     */
+    public static void main(String[] args) {
+        int[] v;
+        int[] tiempos = { 1000, 3000, 5000, 7000, 10000 };
+        
+        for (int i = 0; i < tiempos.length; i++) {
+            long total = 0;
+            int cantidadMovimiento = 0;
+            // iteramos varias veces para sumar y promediar por cada vector
+            for (int k = 0; k < 10; k++) {
+                v = rellenar(tiempos[i]);
 
-       for (int i = 0; i < tiempos.length; i++) {
+                long start = System.nanoTime();
+                cantidadMovimiento += selectionsort(v);
+                long end = System.nanoTime();
 
-           long total = 0;
+                total += (end - start);
+            }
 
-           //iteramos varias veces para sumar y promediar por cada vector
-           for (int k = 0; k < 10; k++) {
+            double promedioTiempo = (total / 10) / 1_000_000.0;
+            int promedioMovimiento = cantidadMovimiento / 10;
 
-               v = rellenar(tiempos[i]);
-
-               long start = System.nanoTime();
-               selectionsort(v);
-               long end = System.nanoTime();
-
-               total += (end - start);
-           }
-
-           double promedio = (total / 10) / 1_000_000.0;
-
-           System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedio + " ms");
-
-       }
-   }
+            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedioTiempo + " ms"
+                + " | " + " cantidad repeticiones: " + promedioMovimiento );
+        }
+    }
 }
