@@ -3,27 +3,31 @@ import java.util.Random;
 public class InsertionSort {
 
     // metodo insertionsort
-    public static void insertionSort(int[] arreglo) {
+    public static int insertionSort(int[] arreglo) {
         int n = arreglo.length;
-
-        int ordenado;
+        int cantidadMovimiento = 0;
+        int key;
         for (int i = 1; i < n; i++) {
-            ordenado = arreglo[i];
+            key = arreglo[i];
             int j = i - 1;
 
             // Find the right location
-            while (j >= 0 && arreglo[j] > ordenado) {
+            while (j >= 0 && arreglo[j] > key) {
                 arreglo[j + 1] = arreglo[j];
                 j--;
+                cantidadMovimiento++;
             }
             // add the location found
-            arreglo[j + 1] = ordenado;
+            arreglo[j + 1] = key;
+            cantidadMovimiento++;
         }
+
+        return cantidadMovimiento;
     }
 
-    public static int [] rellenar(int storage){
+    public static int[] rellenar(int storage) {
         Random random = new Random();
-        int [] v = new int[storage];
+        int[] v = new int[storage];
 
         for (int i = 0; i < v.length; i++) {
             v[i] = random.nextInt(10000);
@@ -34,28 +38,27 @@ public class InsertionSort {
     // llamada del metodo insertionSort
     public static void main(String[] args) {
         int[] v;
-        int[] tiempos = {1000, 3000, 5000, 7000, 10000};
+        int[] tiempos = { 1000, 3000, 5000, 7000, 10000 };
 
         for (int i = 0; i < tiempos.length; i++) {
-
             long total = 0;
-
-            //iteramos varias veces para sumar y promediar por cada vector
+            int cantidadMovimiento = 0;
+            // iteramos varias veces para sumar y promediar por cada vector
             for (int k = 0; k < 10; k++) {
-
                 v = rellenar(tiempos[i]);
 
                 long start = System.nanoTime();
-                insertionSort(v);
+                cantidadMovimiento += insertionSort(v);
                 long end = System.nanoTime();
 
                 total += (end - start);
             }
 
-            double promedio = (total / 10) / 1_000_000.0;
+            double promedioTiempo = (total / 10) / 1_000_000.0;
+            int promedioMovimiento = cantidadMovimiento / 10;
 
-            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedio + " ms");
-
+            System.out.println("n = " + tiempos[i] + " | tiempo promedio: " + promedioTiempo + " ms"
+                    + " | " + " cantidad repeticiones: " + promedioMovimiento);
         }
     }
 }
