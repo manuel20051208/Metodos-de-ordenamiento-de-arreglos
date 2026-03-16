@@ -1,29 +1,33 @@
 import java.util.Random;
 
 public class SelectionSort {
-    // metodo selectionsort
-    public static int selectionSort(int[] arr) {
+    static long cantidadMovimiento = 0;
+    static long cantidadComparaciones = 0;
+
+    // metodo selection sort
+    public static void selectionSort(int[] arr) {
         int n = arr.length;
-        int ubicacion, temp;
-        int movimientos = 0;
+        int ubicacion;
+        int temp;
 
         for (int i = 0; i < n - 1; i++) {
             ubicacion = i;
 
             for (int j = i + 1; j < n; j++) {
+                cantidadComparaciones++;
                 if (arr[ubicacion] > arr[j]) {
                     ubicacion = j;
                 }
             }
 
+            // solo cuenta movimiento si ubicacion cambio
             if (ubicacion != i) {
                 temp = arr[i];
                 arr[i] = arr[ubicacion];
                 arr[ubicacion] = temp;
-                movimientos++;
+                cantidadMovimiento ++;
             }
         }
-        return movimientos;
     }
 
     public static int[] rellenar(int size) {
@@ -43,19 +47,19 @@ public class SelectionSort {
         int[] v;
 
         // encabezado
-        System.out.println("=".repeat(55));
-        System.out.printf("%-15s %-25s %-20s%n", "n", "Tiempo promedio(ms)", "Movimientos");
-        System.out.println("=".repeat(55));
+        System.out.println("=".repeat(80));
+        System.out.printf("%-15s %-25s %-20s %-15s%n", "n", "Tiempo promedio(ms)",
+                "Movimientos", "Comparaciones");
+        System.out.println("=".repeat(80));
 
         for (int i = 0; i < tiempos.length; i++) {
             long total = 0;
-            long cantidadMovimiento = 0;
 
             for (int k = 0; k < 100; k++) {
                 v = rellenar(tiempos[i]);
 
                 long start = System.nanoTime();
-                cantidadMovimiento += selectionSort(v);
+                selectionSort(v);
                 long end = System.nanoTime();
 
                 total += (end - start);
@@ -63,11 +67,15 @@ public class SelectionSort {
 
             double promedioTiempo = (total / 100) / 1_000_000.0;
             long promedioMovimiento = cantidadMovimiento / 100;
+            long promedioComparaciones = cantidadComparaciones / 100;
 
-            System.out.printf("%-15d %-25.4f %-20d%n",
-                    tiempos[i], promedioTiempo, promedioMovimiento);
+            cantidadMovimiento = 0;
+            cantidadComparaciones = 0;
+
+            System.out.printf("%-15d %-25.4f %-20d %-15d%n",
+                    tiempos[i], promedioTiempo, promedioMovimiento, promedioComparaciones);
         }
 
-        System.out.println("=".repeat(55));
+        System.out.println("=".repeat(80));
     }
 }

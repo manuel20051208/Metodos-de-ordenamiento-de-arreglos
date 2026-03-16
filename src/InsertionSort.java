@@ -1,11 +1,12 @@
 import java.util.Random;
 
 public class InsertionSort {
+    static long cantidadMovimiento = 0;
+    static long cantidadComparaciones = 0;
 
-    // metodo insertionsort
-    public static int insertionSort(int[] arreglo) {
+    // metodo insertion sort
+    public static void insertionSort(int[] arreglo) {
         int n = arreglo.length;
-        int cantidadMovimiento = 0;
         int key;
 
         for (int i = 1; i < n; i++) {
@@ -16,6 +17,7 @@ public class InsertionSort {
                 arreglo[j + 1] = arreglo[j];
                 j--;
                 cantidadMovimiento++;
+                cantidadComparaciones++;
             }
 
             // solo cuenta como movimiento si key cambió de posición
@@ -24,7 +26,6 @@ public class InsertionSort {
                 cantidadMovimiento++;
             }
         }
-        return cantidadMovimiento;
     }
 
     public static int[] rellenar(int size) {
@@ -43,19 +44,19 @@ public class InsertionSort {
         int[] v;
 
         // encabezado
-        System.out.println("=".repeat(55));
-        System.out.printf("%-15s %-25s %-20s%n", "n", "Tiempo promedio(ms)", "Movimientos");
-        System.out.println("=".repeat(55));
+        System.out.println("=".repeat(80));
+        System.out.printf("%-15s %-25s %-20s %-15s%n", "n", "Tiempo promedio(ms)",
+         "Movimientos", "Comparaciones");
+        System.out.println("=".repeat(80));
 
         for (int i = 0; i < tiempos.length; i++) {
             long total = 0;
-            long cantidadMovimiento = 0;
 
             for (int k = 0; k < 100; k++) {
                 v = rellenar(tiempos[i]);
 
                 long start = System.nanoTime();
-                cantidadMovimiento += insertionSort(v);
+                insertionSort(v);
                 long end = System.nanoTime();
 
                 total += (end - start);
@@ -63,11 +64,15 @@ public class InsertionSort {
 
             double promedioTiempo = (total / 100) / 1_000_000.0;
             long promedioMovimiento = cantidadMovimiento / 100;
+            long promedioComparaciones = cantidadComparaciones / 100;
 
-            System.out.printf("%-15d %-25.4f %-20d%n",
-                    tiempos[i], promedioTiempo, promedioMovimiento);
+            cantidadMovimiento = 0;
+            cantidadComparaciones = 0;
+
+            System.out.printf("%-15d %-25.4f %-20d %-15d%n",
+                    tiempos[i], promedioTiempo, promedioMovimiento, promedioComparaciones);
         }
 
-        System.out.println("=".repeat(55));
+        System.out.println("=".repeat(80));
     }
 }
